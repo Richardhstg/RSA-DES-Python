@@ -32,12 +32,12 @@ def handle_client(client_socket, address):
 
 def main():
     host = socket.gethostname()
-    port = 5000
+    port = 2024
 
     server = socket.socket()
     server.bind((host, port))
     
-    server.listen(5)
+    server.listen(3)
     
     print("[INFO] Server berjalan dan menunggu koneksi...")
 

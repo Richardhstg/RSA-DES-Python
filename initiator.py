@@ -28,13 +28,13 @@ def main():
     client.send(store_pu.encode())
     
     print("Berhasil kirim Public Key ke PKA")
-      
-    # request public key client lain
-    print("1. Request public key client lain")
-    print("2. Mulai Chat")
-    print("3. Exit")
+         
     
     while True:
+        print("1. Request public key client lain")
+        print("2. Mulai Chat")
+        print("3. Exit")  
+                
         message = input(">> ")
         if message == "3":
             break
@@ -89,13 +89,29 @@ def main():
             message = rsa_encrypt(n2_str, pu_dest)
             client.send(message.encode())
             
+            client.close()
+            print("[INFO] Koneksi ke PKA ditutup.")
             
+        if message == "2":
+            host = socket.gethostname()
+            port = 2024
 
-
-        # message = rsa_encrypt(message, pu_pka)
-        # client.send(message.encode())
-    client.close()
-    print("[INFO] Koneksi ditutup.")
+            client = socket.socket()
+            client.connect((host, port))
+            
+            des_key = input("Key untuk DES : ")
+            pu_key_dest = input("Key Public Penerima: ")
+            
+            e, n = map(int, pu_key_dest.split(", "))
+            pu_dest = e, n
+            
+            enc_1_des_key = rsa_encrypt(des_key, private_key)
+            enc_2_des_key = rsa_encrypt(enc_1_des_key, pu_dest)
+            
+            client.send(enc_2_des_key.encode())
+            
+            
+            
 
 if __name__ == "__main__":
     main()

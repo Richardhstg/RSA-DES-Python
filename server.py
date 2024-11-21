@@ -5,7 +5,6 @@ import threading
 clients = []
 
 def broadcast(message, sender_socket):
-    """Meneruskan pesan ke semua klien kecuali pengirim."""
     for client in clients:
         if client != sender_socket:
             try:
@@ -15,7 +14,6 @@ def broadcast(message, sender_socket):
                 clients.remove(client)
 
 def handle_client(client_socket, address):
-    """Fungsi untuk menangani komunikasi dengan klien tertentu."""
     print(f"[INFO] Koneksi diterima dari {address}")
     while True:
         try:

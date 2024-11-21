@@ -4,7 +4,19 @@ import random
 from RSA import *
 from DES import des_decryption, des_encryption
 from key_generator import generate_keys
-    
+
+def receive_messages(client_socket, des_key):
+    while True:
+        try:
+            message = client_socket.recv(1024).decode()
+            if not message:
+                break
+            message = des_decryption(message, des_key)
+            print(f"\r[Pesan] {message}\n>> ", end="")
+        except:
+            print("[INFO] Koneksi ke server terputus.")
+            break
+
 def main():
     pu_pka = (125033, 541279)
     client_id = random.randint(1000, 9999)
@@ -99,8 +111,23 @@ def main():
 
     dec_2_des_key = rsa_decrypt(dec_1_des_key, pu_dest)
     
-    print(dec_2_des_key)
+    print(f"DES Key : {dec_2_des_key}")
     
+    print("Chat Tersambung...")
+    des_key = input("Key untuk DES : ")
+    
+    thread = threading.Thread(target=receive_messages, args=(client, des_key))
+    thread.start()
 
+    while True:
+        message = input(">> ")
+        if message.lower() == "exit":
+            break
+        message = des_encryption(message, des_key)
+        client.send(message.encode())
+
+    client.close()
+    print("[INFO] Koneksi ditutup.")
+    
 if __name__ == "__main__":
     main()

@@ -65,30 +65,30 @@ def decrypt(cipher_text, private_key):
 
 # Demo RSA
 if __name__ == "__main__":
-    random_id = random.randint(1000, 9999)  # Membatasi angka antara 100 hingga 999
-    print(random_id)
+    # random_id = random.randint(1000, 9999)  # Membatasi angka antara 100 hingga 999
+    # print(random_id)
     
     public_key, private_key = generate_keys()
 
-    print(public_key)
-    print(private_key)
+    # print(public_key)
+    # print(private_key)
 
-    e, n = public_key
+    # e, n = public_key
     
-    result = ", ".join([str(e), str(n)])
-    result = ", ".join([str(random_id), str(result)])
-    print(result)
+    # result = ", ".join([str(e), str(n)])
+    # result = ", ".join([str(random_id), str(result)])
+    # print(result)
     
-    split_result = result.split(", ")
-    id_1 = int(split_result[0])
-    e_1 = int(split_result[1])
-    n_1 = int(split_result[2])
+    # split_result = result.split(", ")
+    # id_1 = int(split_result[0])
+    # e_1 = int(split_result[1])
+    # n_1 = int(split_result[2])
     
-    print(id_1)
-    print(e_1)
-    print(n_1)
+    # print(id_1)
+    # print(e_1)
+    # print(n_1)
     
-    print(f"client id {id_1}")
+    # print(f"client id {id_1}")
     
     # split_msg = message.split(", ")
     # e = int(split_msg[0])
@@ -97,13 +97,13 @@ if __name__ == "__main__":
     # pu_client = ", ".join([str(e), str(n)])
     
     
-    # message = "79,3337"
-    # print("Original Message:", message)
+    message = "1"
+    print("Original Message:", message)
 
-    # # Enkripsi pesan
-    # encrypted_message = encrypt(message, public_key)
-    # print("Encrypted Message:", encrypted_message)
+    # Enkripsi pesan
+    encrypted_message = encrypt(message, public_key)
+    print("Encrypted Message:", encrypted_message)
 
-    # # Dekripsi pesan
-    # decrypted_message = decrypt(encrypted_message, private_key)
-    # print("Decrypted Message:", decrypted_message)
+    # Dekripsi pesan
+    decrypted_message = decrypt(encrypted_message, private_key)
+    print("Decrypted Message:", decrypted_message)

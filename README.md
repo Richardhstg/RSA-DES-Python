@@ -7,5 +7,5 @@
 
 ### Pembagian Kerja
 
-- Richard :
-- Willy :
+- Richard : Implementasi RSA dan PKA
+- Willy : Implementasi pertukaran Key DES
